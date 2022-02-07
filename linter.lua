@@ -1,6 +1,7 @@
 -- mod-version:2
 local core = require "core"
 local style = require "core.style"
+local common = require "core.common"
 local command = require "core.command"
 local config = require "core.config"
 local DocView = require "core.docview"
@@ -9,6 +10,13 @@ local Doc = require "core.doc"
 
 config.linter_box_line_limit = 80
 config.linter_scan_interval = 0.1 -- scan every 100 ms
+
+style.lint = {
+  info = style.syntax["keyword2"],
+  hint = style.syntax["function"],
+  warning = style.linter_warning or style.syntax["function"],
+  error = style.linter_error or { common.color "#FF3333" }
+}
 
 local current_doc = nil
 local cache = setmetatable({}, { __mode = "k" })
@@ -342,7 +350,7 @@ function DocView:draw_line_text(idx, x, y)
   local text = doc.lines[idx]
   for _, warning in ipairs(line_warnings) do
     local x1, x2 = get_word_limits(self, text, x, warning.col)
-    local color = style.linter_warning or style.syntax.literal
+    local color = style.lint[line_warnings.type] or style.lint.error or style.syntax.literal
     local h = style.divider_size
     local line_h = self:get_line_height()
     renderer.draw_rect(x1, y + line_h - h, x2 - x1, h, color)
@@ -443,6 +451,32 @@ local function has_cached()
   return core.active_view.doc and cache[core.active_view.doc]
 end
 
+local function doc_from_name(name)
+	for _,d in pairs(core.docs) do
+		if name == d.filename or name == d.abs_filename then return d end
+	end
+	return nil
+end
+
+local function add_message(filename, line, column, kind, message, rail)
+	local doc = doc_from_name(filename)
+	if doc == nil then
+		core.log_quiet("linter: could not add message. Doc "..filename.."not found")
+		return
+	end
+	local warning = {
+		col = column,
+		type = kind,
+		text = message,
+	}
+	cache[doc] = cache[doc] or {}
+	cache[doc][line] = cache[doc][line] or {
+		line_text = doc.lines[line] or ""
+	}
+	table.insert(cache[doc][line], warning)
+	core.log(cache[doc][line][1].text)
+end
+
 command.add(has_cached, {
   ["linter:move-to-next-warning"] = function()
     local doc = core.active_view.doc
@@ -467,10 +501,22 @@ command.add(has_cached, {
   end,
 })
 
+local function clear_messages(filename)
+	local doc = doc_from_name(filename)
+	if doc == nil then
+		core.log_quiet("linter: could not clear warnings. Doc "..filename.."not found")
+		return
+	end
+	cache[doc] = {}
+end
 
 return {
   add_language = function(lang)
     table.insert(linters, lang)
   end,
-  escape_to_pattern = escape_to_pattern
+  escape_to_pattern = escape_to_pattern,
+  add_message = add_message,
+  messages = {},
+  clear_messages = clear_messages,
+  init_doc = function (a, b) return end
 }
