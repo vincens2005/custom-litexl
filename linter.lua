@@ -14,9 +14,13 @@ config.linter_scan_interval = 0.1 -- scan every 100 ms
 style.lint = {
   info = style.syntax["keyword2"],
   hint = style.syntax["function"],
-  warning = style.linter_warning or style.syntax["function"],
+  warning = nil,
   error = style.linter_error or { common.color "#FF3333" }
 }
+
+core.add_thread(function()
+	style.lint.warning = style.lint.warning or style.linter_warning or style.syntax["function"]
+end)
 
 local current_doc = nil
 local cache = setmetatable({}, { __mode = "k" })
@@ -350,7 +354,7 @@ function DocView:draw_line_text(idx, x, y)
   local text = doc.lines[idx]
   for _, warning in ipairs(line_warnings) do
     local x1, x2 = get_word_limits(self, text, x, warning.col)
-    local color = style.lint[line_warnings.type] or style.lint.error or style.syntax.literal
+    local color = style.lint[warning.type] or style.lint.warning or style.syntax.literal
     local h = style.divider_size
     local line_h = self:get_line_height()
     renderer.draw_rect(x1, y + line_h - h, x2 - x1, h, color)
