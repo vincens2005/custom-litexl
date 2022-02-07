@@ -478,7 +478,6 @@ local function add_message(filename, line, column, kind, message, rail)
 		line_text = doc.lines[line] or ""
 	}
 	table.insert(cache[doc][line], warning)
-	core.log(cache[doc][line][1].text)
 end
 
 command.add(has_cached, {
