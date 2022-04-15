@@ -8,6 +8,7 @@ local config = require "core.config"
 local style = require "core.style"
 local command = require "core.command"
 local lspconfig = require "plugins.lsp.config"
+--local lsp = require "plugins.lsp"
 --local common = require "core.common"
 
 ------------------------------ Themes ----------------------------------------
@@ -46,7 +47,7 @@ style.icon_big_font = renderer.font.load(USERDIR .. "/fonts/material_icons.ttf",
 config.trimwhitespace = true
 --
 -- disable detectindent, otherwise it is enabled by default
-config.plugins.detectindent = false
+--config.plugins.detectindent = false
 
 config.plugins.contextmenu = false
 
@@ -101,8 +102,31 @@ lspconfig.pylsp.setup {}
 
 lspconfig.clangd.setup {}
 
+lspconfig.sumneko_lua.setup {
+	command = {
+		"lua-language-server"
+	},
+	settings = {
+		Lua = {
+			workspace = {
+				library = {
+					[DATADIR] = true
+				}
+			},
+			diagnostics = {
+				neededFileStatus = {
+					["lowercase-global"] = "None"
+				}
+			}
+		}
+	}
+}
+
+
+
 -- enable borderless mode :pogr:
 config.borderless = true
+config.always_show_tabs = false
 
 --------------------------- Key bindings -------------------------------------
 
