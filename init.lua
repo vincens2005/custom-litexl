@@ -78,6 +78,9 @@ config.tab_close_button = false
 -- always use tabs
 config.tab_type = "hard"
 
+-- make git diffs appear to the right of line numbers
+style.gitdiff_padding = 43
+
 -- hide todos
 core.add_thread(function()
   command.perform("todotreeview:toggle")
