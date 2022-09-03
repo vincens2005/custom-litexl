@@ -2,7 +2,7 @@
 local syntax = require "core.syntax"
 
 syntax.add {
-  files = { "%.css$", "%.rasi$" },
+  files = { "%.css$", "%.rasi$", "%.less$"},
   patterns = {
     { pattern = "\\.",                type = "selector" },
     { pattern = "//.-\n",             type = "comment"  },

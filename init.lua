@@ -45,6 +45,7 @@ style.icon_big_font = renderer.font.load(USERDIR .. "/fonts/material_icons.ttf",
 
 -- enable trimwhitespace, otherwise it is disable by default:
 config.trimwhitespace = true
+config.plugins.trimwhitespace = true
 --
 -- disable detectindent, otherwise it is enabled by default
 --config.plugins.detectindent = false
@@ -69,6 +70,7 @@ config.plugins.linter = false
 --config.plugins.cukmekerb_language_css = false
 config.plugins.language_xml = false
 config.plugins.language_html = false
+config.plugins.typingspeed = false
 
 config.autosave_timeout = 0.8
 
