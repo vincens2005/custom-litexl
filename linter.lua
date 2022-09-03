@@ -1,4 +1,4 @@
--- mod-version:2
+-- mod-version:3
 local core = require "core"
 local style = require "core.style"
 local common = require "core.common"
@@ -355,7 +355,7 @@ function DocView:draw_line_text(idx, x, y)
   for _, warning in ipairs(line_warnings) do
     local x1, x2 = get_word_limits(self, text, x, warning.col)
     local color = style.lint[warning.type] or style.lint.warning or style.syntax.literal
-    local h = style.divider_size
+    local h = style.lint_size
     local line_h = self:get_line_height()
     renderer.draw_rect(x1, y + line_h - h, x2 - x1, h, color)
   end
@@ -425,31 +425,6 @@ function DocView:draw()
     core.root_view:defer_draw(draw_warning_box, hover_boxes[self])
   end
 end
-
-
-local get_items = StatusView.get_items
-function StatusView:get_items()
-  local left, right  = get_items(self)
-
-  local doc = core.active_view.doc
-  local cached = cache[doc or ""]
-  if cached then
-    local count = 0
-    for _, v in pairs(cached) do
-      count = count + #v
-    end
-    table.insert(left, StatusView.separator)
-    if not doc:is_dirty() and count > 0 then
-      table.insert(left, style.text)
-    else
-      table.insert(left, style.dim)
-    end
-    table.insert(left, "warnings: " .. count)
-  end
-
-  return left, right
-end
-
 
 local function has_cached()
   return core.active_view.doc and cache[core.active_view.doc]
