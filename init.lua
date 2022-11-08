@@ -1,4 +1,4 @@
--- mod-version:2 lite-xl 2.0
+-- mod-version:3 lite-xl 2.0
 -- put user settings here
 -- this module will be loaded after everything else when the application starts
 -- it will be automatically reloaded when saved
@@ -19,12 +19,14 @@ style.selectionhighlight = style.line_highlight
 ------------------------------- Fonts ----------------------------------------
 
 -- customize fonts:
-style.code_font  =  renderer.font.load(USERDIR  ..  "/fonts/NotoMono-Regular.ttf",  13  *  SCALE)
-style.font = renderer.font.load(USERDIR .. "/fonts/NotoSans-Regular.ttf", 11 * SCALE)
+style.code_font  =  renderer.font.load(USERDIR  ..  "/fonts/NotoMono-Regular.ttf",  14  *  SCALE)
+style.font = renderer.font.load(USERDIR .. "/fonts/NotoSans-Regular.ttf", 12 * SCALE)
 style.big_font = renderer.font.load(USERDIR .. "/fonts/NotoSans-Regular.ttf", 40 * SCALE)
 
 style.icon_font = renderer.font.load(USERDIR .. "/fonts/material_icons.ttf", 18 * SCALE)
-style.icon_big_font = renderer.font.load(USERDIR .. "/fonts/material_icons.ttf", 24 * SCALE)
+style.icon_big_font = renderer.font.load(USERDIR .. "/fonts/material_icons.ttf", 26 * SCALE)
+
+
 -- font names used by lite:
 -- style.font          : user interface
 -- style.big_font      : big text in welcome screen
