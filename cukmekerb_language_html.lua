@@ -1,30 +1,23 @@
--- mod-version:2 -- lite-xl 1.16
+-- mod-version:3
 local syntax = require "core.syntax"
 
 syntax.add {
+  name = "HTML",
   files = { "%.html?$" },
+  block_comment = { "<!--", "-->" },
   patterns = {
-    { 
-      pattern = { 
-        "<%s*[sS][cC][rR][iI][pP][tT]%s+[tT][yY][pP][eE]%s*=%s*" ..
-          "['\"]%a+/[jJ][aA][vV][aA][sS][cC][rR][iI][pP][tT]['\"]%s*>",
-        "<%s*/[sS][cC][rR][iI][pP][tT]>" 
-      },
-      syntax = ".js", 
-      type = "function" 
-    },
-    { 
-      pattern = { 
-        "<%s*[sS][cC][rR][iI][pP][tT]%s*>",
-        "<%s*/%s*[sS][cC][rR][iI][pP][tT]>" 
+    {
+      pattern = {
+        "<%s*[sS][cC][rR][iI][pP][tT]%f[%s>].->",
+        "<%s*/%s*[sS][cC][rR][iI][pP][tT]%s*>"
       },
       syntax = ".js",
       type = "function"
     },
-    { 
-      pattern = { 
-        "<%s*[sS][tT][yY][lL][eE][^>]*>", 
-        "<%s*/%s*[sS][tT][yY][lL][eE]%s*>" 
+    {
+      pattern = {
+        "<%s*[sS][tT][yY][lL][eE]%f[%s>].->",
+        "<%s*/%s*[sS][tT][yY][lL][eE]%s*>"
       },
       syntax = ".css",
       type = "function"
@@ -44,3 +37,4 @@ syntax.add {
   },
   symbols = {},
 }
+

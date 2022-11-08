@@ -1,10 +1,11 @@
--- mod-version:2 -- lite-xl 2.0
+-- mod-version:3 -- lite-xl 2.0
 -- Support for the GDScript programming language: https://godotengine.org/
 -- Covers the most used keywords up to Godot version 3.2.x
 
 local syntax = require "core.syntax"
 
 syntax.add {
+  name = "GDScript",
   files = { "%.gd$" },
   comment = "#",
   patterns = {
