@@ -426,30 +426,25 @@ function DocView:draw()
   end
 end
 
-
-local get_items = StatusView.get_items
-function StatusView:get_items()
-  local left, right  = get_items(self)
-
-  local doc = core.active_view.doc
-  local cached = cache[doc or ""]
-  if cached then
-    local count = 0
-    for _, v in pairs(cached) do
-      count = count + #v
+core.status_view:add_item({
+  name = "Linter Warnings",
+  alignment = StatusView.Item.RIGHT,
+  position = -3,
+  tooltip = "linter warnings",
+  separator = core.status_view.separator2,
+  get_item = function()
+    local doc = core.active_view.doc
+    local cached = cache[doc or ""]
+    if cached then
+      local count = 0
+      for _, v in pairs(cached) do
+        count = count + #v
+      end
+      return {style.dim, "warnings: " .. count}
     end
-    table.insert(left, StatusView.separator)
-    if not doc:is_dirty() and count > 0 then
-      table.insert(left, style.text)
-    else
-      table.insert(left, style.dim)
-    end
-    table.insert(left, "warnings: " .. count)
+    return {}
   end
-
-  return left, right
-end
-
+})
 
 local function has_cached()
   return core.active_view.doc and cache[core.active_view.doc]
