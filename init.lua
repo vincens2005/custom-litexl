@@ -92,6 +92,10 @@ config.plugins.bracketmatch = {
 	line_size = SCALE
 }
 
+config.plugins.linewrapping = {
+	mode = "word"
+}
+
 -- hide todos
 core.add_thread(function()
   command.perform("todotreeview:toggle")
