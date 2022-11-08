@@ -153,9 +153,7 @@ keymap.add {
 
 -- put in thread to override plugin keymap
 core.add_thread(function()
-	keymap.add({["return"] = {"autocomplete:complete", "command:submit", "autoinsert:newline", "terminal:return"}}, true)
-	-- fish shell
-	--config.terminal.shell = "/usr/bin/fish"
+	keymap.add({["return"] = {"autocomplete:complete", "command:submit", "autoinsert:newline", "dialog:select"}})
 end)
 
 
