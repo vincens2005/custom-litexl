@@ -2,7 +2,9 @@
 local syntax = require "core.syntax"
 
 syntax.add {
+  name = "CSS",
   files = { "%.css$", "%.rasi$", "%.less$"},
+  block_comment = { "/*", "*/" },
   patterns = {
     { pattern = "\\.",                type = "selector" },
     { pattern = "//.-\n",             type = "comment"  },

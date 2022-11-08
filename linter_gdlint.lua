@@ -1,4 +1,4 @@
--- mod-version:2
+-- mod-version:3
 -- this is for the gdlint linter (the version from https://github.com/Scony/godot-gdscript-toolkit)
 
 local config = require "core.config"

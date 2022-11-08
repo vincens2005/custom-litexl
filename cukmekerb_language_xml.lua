@@ -1,9 +1,11 @@
--- mod-version:2
+-- mod-version:3
 local syntax = require "core.syntax"
 
 syntax.add {
+  name = "XML",
   files = { "%.xml$" },
   headers = "<%?xml",
+  block_comment = { "<!--", "-->" },
   patterns = {
     { pattern = { "<!%-%-", "%-%->" },     type = "comment"  },
     { pattern = { '%f[^>][^<]', '%f[<]' }, type = "normal"   },

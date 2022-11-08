@@ -8,8 +8,8 @@ local config = require "core.config"
 local style = require "core.style"
 local command = require "core.command"
 local lspconfig = require "plugins.lsp.config"
+local common = require "core.common"
 --local lsp = require "plugins.lsp"
---local common = require "core.common"
 
 ------------------------------ Themes ----------------------------------------
 -- light theme:
@@ -60,9 +60,10 @@ if pcall(require, "plugins.todotreeview-xl") then
 	table.insert(config.ignore_paths, "%.import/")
 end
 
-if pcall(require, "plugins.minimap") then
-	config.plugins.minimap.caret_color = style.dim
-end
+
+config.plugins.minimap.caret_color = style.dim
+--config.plugins.minimap.instant_scroll = true
+
 
 config.plugins.linecopypaste = false
 config.plugins.language_css = false
@@ -84,6 +85,12 @@ config.tab_type = "hard"
 
 -- make git diffs appear to the right of line numbers (this is actually not poggers)
 -- style.gitdiff_padding = 40
+
+style.bracketmatch_frame_color = {common.color "#b9b9b9"}
+config.plugins.bracketmatch = {
+	style = "frame",
+	line_size = SCALE
+}
 
 -- hide todos
 core.add_thread(function()
