@@ -39,7 +39,7 @@
 			"description": "Lintplus with hover errors",
 			"version": "0.2",
 			"id": "lintplus",
-			"name": "lint+"
+			"name": "lint+",
 			"mod_version": "3",
 			"path": "lintplus.lua",
 			"dependencies": {
