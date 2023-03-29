@@ -9,8 +9,8 @@ local style = require "core.style"
 local command = require "core.command"
 local lspconfig = require "plugins.lsp.config"
 local common = require "core.common"
---local lsp = require "plugins.lsp"
-
+-- local lsp = require "plugins.lsp"
+SCALE = 1
 ------------------------------ Themes ----------------------------------------
 -- light theme:
 -- core.reload_module("colors.summer")
@@ -46,7 +46,6 @@ style.icon_big_font = renderer.font.load(USERDIR .. "/fonts/material_icons.ttf",
 -- enable or disable plugin loading setting config entries:
 
 -- enable trimwhitespace, otherwise it is disable by default:
-config.trimwhitespace = true
 config.plugins.trimwhitespace = true
 --
 -- disable detectindent, otherwise it is enabled by default
@@ -68,9 +67,9 @@ config.plugins.minimap.caret_color = style.dim
 config.plugins.linecopypaste = false
 config.plugins.language_css = false
 config.plugins.better_language_css = false
-config.plugins.linter = false
+-- config.plugins.linter.enabled = false
 
---config.plugins.cukmekerb_language_css = false
+-- config.plugins.cukmekerb_language_css = false
 config.plugins.language_xml = false
 config.plugins.language_html = false
 config.plugins.typingspeed = false
@@ -83,13 +82,15 @@ config.tab_close_button = false
 -- always use tabs
 config.tab_type = "hard"
 
+-- config.discord_rpc = {autoconnect = false}
 -- make git diffs appear to the right of line numbers (this is actually not poggers)
 -- style.gitdiff_padding = 40
 
 style.bracketmatch_frame_color = {common.color "#b9b9b9"}
 config.plugins.bracketmatch = {
 	style = "frame",
-	line_size = SCALE
+	line_size = SCALE,
+	highlight_both = true,
 }
 
 config.plugins.linewrapping = {
@@ -120,7 +121,7 @@ lspconfig.pylsp.setup {}
 
 lspconfig.clangd.setup {}
 
-lspconfig.sumneko_lua.setup {
+lspconfig.sumneko_lua.setup { --[[
 	command = {
 		"lua-language-server"
 	},
@@ -138,9 +139,16 @@ lspconfig.sumneko_lua.setup {
 			}
 		}
 	}
+	]]--
 }
 
-
+-- lsp.add_server {
+--   name = "godot-language-server",
+--   language = "gdscript",
+--   file_patterns = { "%.gd$", "%.tscn$" },
+--   command = {"netcat", "localhost", "6008"},
+--   verbose = false
+-- }
 
 -- enable borderless mode :pogr:
 config.borderless = true

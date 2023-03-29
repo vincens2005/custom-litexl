@@ -1,0 +1,71 @@
+{
+	"addons": [
+		{
+			"description": "Improved CSS syntax highlighting",
+			"version": "0.1",
+			"id": "cukmekerb_language_css",
+			"mod_version": "3",
+			"path": "cukmekerb_language_css.lua"
+		},
+		{
+			"description": "Improved HTML syntax highlighting",
+			"version": "0.1",
+			"id": "cukmekerb_language_html",
+			"mod_version": "3",
+			"path": "cukmekerb_language_html.lua"
+		},
+		{
+			"description": "Improved XML syntax highlighting",
+			"version": "0.1",
+			"id": "cukmekerb_language_xml",
+			"mod_version": "3",
+			"path": "cukmekerb_language_xml.lua"
+		},
+		{
+			"description": "GDscript syntax highlighting",
+			"version": "0.1",
+			"id": "language_gdscript",
+			"mod_version": "3",
+			"path": "language_gdscript.lua"
+		},
+		{
+			"description": "Linter using subprocess API",
+			"version": "0.1",
+			"id": "linter",
+			"mod_version": "3",
+			"path": "linter.lua"
+		},
+		{
+			"description": "Lintplus with hover errors",
+			"version": "0.2",
+			"id": "lintplus",
+			"name": "lint+"
+			"mod_version": "3",
+			"path": "lintplus.lua",
+			"dependencies": {
+				"linter": {}
+			}
+		},
+		{
+			"description": "Serve files with live reloading. Requires live-server global NPM package",
+			"version": "0.1",
+			"id": "liveserver",
+			"mod_version": "3",
+			"path": "liveserver.lua"
+		},
+		{
+			"description": "Linter using subprocess API",
+			"version": "0.1",
+			"id": "linter",
+			"mod_version": "3",
+			"path": "linter.lua"
+		},
+		{
+			"description": "VSCode-style selection highlighting",
+			"version": "0.2",
+			"id": "selectionhighlight",
+			"mod_version": "3",
+			"path": "selectionhighlight.lua"
+		}
+	]
+}
