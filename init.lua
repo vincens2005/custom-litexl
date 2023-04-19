@@ -111,6 +111,8 @@ config.autocomplete = false
 
 lspconfig.cssls.setup {}
 
+lspconfig.rls.setup {}
+
 lspconfig.html.setup {}
 
 lspconfig.jsonls.setup {}
